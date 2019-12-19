@@ -1,6 +1,7 @@
 from github_webhook import Webhook
 from github_webhook.webhook import EVENT_DESCRIPTIONS
 import yaml
+from yaml import SafeLoader
 import os
 import hmac
 
@@ -8,7 +9,7 @@ import hmac
 import six
 from flask import abort, request
 
-payloads = yaml.load(open("commands.yaml").read())
+payloads = yaml.load(open("commands.yaml").read(), SafeLoader)
 
 def handle_event(event_type,data):
     print("Got event {} with data: {}".format(event_type, data))
